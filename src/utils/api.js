@@ -5,10 +5,8 @@ export const fetchPokemons = async (offset = 0, limit = 15) => {
     `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
   );
 
-  // Store total count
   const totalCount = res.data.count;
 
-  // Get details
   const detailed = await Promise.all(
     res.data.results.map(async (p) => {
       const details = await axios.get(p.url);
@@ -23,4 +21,9 @@ export const fetchPokemons = async (offset = 0, limit = 15) => {
     pokemons: detailed,
     totalCount,
   };
+};
+
+export const fetchAllPokemonNames = async () => {
+  const res = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+  return res.data.results.map((p) => p.name);
 };

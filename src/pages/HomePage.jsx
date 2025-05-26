@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { fetchPokemons } from "../utils/api";
+import { fetchPokemons, fetchAllPokemonNames } from "../utils/api";
 import PokemonCard from "../components/PokemonCard";
 import SearchBar from "../components/SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
+  const [allPokemonNames, setAllPokemonNames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-
+  const navigate = useNavigate();
   const perPage = 15;
 
   useEffect(() => {
@@ -21,6 +23,18 @@ const Home = () => {
     };
     loadData();
   }, [currentPage]);
+
+  useEffect(() => {
+    const loadAllNames = async () => {
+      const names = await fetchAllPokemonNames();
+      setAllPokemonNames(names);
+    };
+    loadAllNames();
+  }, []);
+
+  const handleSelectPokemon = (name) => {
+    navigate(`/pokemon/${name.toLowerCase()}`);
+  };
 
   const generatePagination = () => {
     const pages = [];
@@ -58,9 +72,9 @@ const Home = () => {
 
   return (
     <div className="p-6 flex flex-col gap-4 bg-slate-800">
-      <h1 className="text-3xl font-bold text-center">Pokédex</h1>
+      <h1 className="text-3xl font-bold text-center text-white">Pokédex</h1>
 
-      <SearchBar />
+      <SearchBar allPokemonNames={allPokemonNames} onSelectPokemon={handleSelectPokemon} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {pokemons.map((pokemon) => (
@@ -68,7 +82,6 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-center mt-8">
         <div className="inline-flex gap-1">
           <button
