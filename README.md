@@ -1,12 +1,43 @@
-# React + Vite
+# 🧿 Modern Pokédex with React and Tailwind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek and responsive Pokédex application built using **React** and **Tailwind CSS**. This project pulls live data from the [PokéAPI](https://pokeapi.co/) to display comprehensive Pokémon information in an intuitive, Pokédex-style interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📸 Preview
 
-## Expanding the ESLint configuration
+![Pokédex Screenshot](./src/assets/quick-preview.jpg)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+
+- 🔍 **Search with Autocomplete**  
+  Type a Pokémon's name to instantly view matching results in a dropdown.
+
+- 📘 **Detailed Pokémon Pages**  
+  View type icons, official artwork, height, weight, abilities, evolution chain, weaknesses, base stats, and flavor text.
+
+- 🎨 **Responsive Design**  
+  Built with Tailwind CSS for a clean and adaptive UI.
+
+- ⚛️ **React Router Integration**  
+  Smooth navigation between the homepage and individual Pokémon pages.
+
+---
+
+## 🛠️ Tech Stack
+
+- **React** – UI rendering and routing  
+- **Tailwind CSS** – Utility-first styling  
+- **Axios** – Data fetching  
+- **PokéAPI** – Source for all Pokémon data  
+
+---
+
+## 🧩 Getting Started
+
+### 📦 Install Dependencies
+
+```bash
+npm install
