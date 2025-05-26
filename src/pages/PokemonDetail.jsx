@@ -9,6 +9,7 @@ const PokemonDetail = () => {
   const [flavorText, setFlavorText] = useState("");
   const [evolution, setEvolution] = useState("None");
   const [weaknesses, setWeaknesses] = useState([]);
+  const [isStuckLoading, setIsStuckLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +50,31 @@ const PokemonDetail = () => {
     fetchData();
   }, [name]);
 
-  if (!pokemon) return <div className="text-white text-center">Loading...</div>;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsStuckLoading(true);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!pokemon) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen text-white text-xl gap-4">
+        <p>Loading...</p>
+        {isStuckLoading && (
+          <div className="flex flex-col item-center justify-center">
+            <p>The Pokemon you are looking might not be available</p>
+            <p className="text-center">Please wait a bit longer</p>
+            <Link to="/" className="text-blue-400 underline text-center">
+              ← Back to Home
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   const height = (pokemon.height / 10).toFixed(1);
   const weight = (pokemon.weight / 10).toFixed(1);
@@ -61,7 +86,7 @@ const PokemonDetail = () => {
   ));
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-gray-700 rounded-lg shadow-md mt-8">
+    <div className="p-6 max-w-md mx-auto bg-gray-700 rounded-lg shadow-md mt-8 mb-8">
       <Link to="/" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-ease duration-200">&larr; Back</Link>
 
       {/* Types */}
